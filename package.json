@@ -1,0 +1,16 @@
+{
+  "name": "aoc2025",
+  "version": "0.0.1",
+  "description": "AOC 2025",
+  "keywords": [
+    "AOC",
+    "2025"
+  ],
+  "license": "MIT",
+  "author": "Lux Brush",
+  "type": "module",
+  "main": "main.ts",
+  "scripts": {
+    "start": "bun ./src/main.ts"
+  }
+}
