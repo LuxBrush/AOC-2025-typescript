@@ -4,7 +4,7 @@ const { log } = console;
 
 export const day01 = {
   async part01(status: "print" | "run"): Promise<void> {
-    let password = 0;
+    let password = 982;
     const rawRotationDirection = await readInput("./src/day01/input.txt");
     const rotationDirection = rawRotationDirection.split("\n");
 

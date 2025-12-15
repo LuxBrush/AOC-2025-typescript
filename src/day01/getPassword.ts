@@ -7,7 +7,6 @@ export function getPassword(rotationInstructions: string[]): number {
     if (match !== null) {
       const [_, direction, distance] = match as [string, "L" | "R", string];
       startingPoint = rotateDial(direction, startingPoint, distance);
-      log(direction, distance, startingPoint)
     }
     if (startingPoint === 0) {
       counter++;
