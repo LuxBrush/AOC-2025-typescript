@@ -24,6 +24,6 @@ export const day01 = {
       password = 1;
     }
 
-    log("Day 01, Part 02", password);
+    log("Day 01, Part 02:", password);
   },
 };
