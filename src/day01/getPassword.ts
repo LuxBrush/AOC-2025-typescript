@@ -1,42 +1,29 @@
-const { log } = console;
 export function getPassword(rotationInstructions: string[]): number {
-  let startingPoint = 50;
-  let counter = 0;
+  let position = 50;
+  let zeroCount = 0;
+
   for (const instruction of rotationInstructions) {
-    const match = instruction.match(/([LR])(\d+)/);
-    if (match !== null) {
-      const [_, direction, distance] = match as [string, "L" | "R", string];
-      startingPoint = rotateDial(direction, startingPoint, distance);
-    }
-    if (startingPoint === 0) {
-      counter++;
-    }
+    const { direction, distance } = parseInstruction(instruction);
+    position = rotateDial(direction, position, distance);
+    if (position === 0) zeroCount++;
   }
-  return counter;
+
+  return zeroCount;
 }
 
-function rotateDial(direction: "L" | "R", inputNumber: number, distance: string): number {
-  const distanceInt = parseInt(distance);
-  if (direction === "L") {
-    if (inputNumber - distanceInt < 0) {
-      const remainder = Math.abs(inputNumber - distanceInt);
-      inputNumber = 100;
-      inputNumber -= remainder;
-      inputNumber = inputNumber % 100
-    } else {
-      inputNumber -= distanceInt;
-      inputNumber = inputNumber % 100
-    }
-  } else {
-    if (inputNumber + distanceInt > 99) {
-      const remainder = inputNumber + distanceInt - 100;
-      inputNumber = 0;
-      inputNumber += remainder;
-      inputNumber = inputNumber % 100
-    } else {
-      inputNumber += distanceInt;
-      inputNumber = inputNumber % 100
-    }
+function rotateDial(direction: "L" | "R", current: number, distance: number): number {
+  const delta = direction === "L" ? -distance : distance;
+  return (current + delta) % 100;
+}
+
+function parseInstruction(instruction: string): { direction: "L" | "R"; distance: number } {
+  const match = instruction.match(/([LR])(\d+)/);
+  if (!match) {
+    throw new Error(`Invalid instruction format: "${instruction}"`);
   }
-  return inputNumber;
+  const [_, direction, distanceString] = match;
+  return {
+    direction: direction as "L" | "R",
+    distance: parseInt(distanceString),
+  };
 }

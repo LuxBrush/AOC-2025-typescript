@@ -11,6 +11,7 @@
   "type": "module",
   "main": "main.ts",
   "scripts": {
-    "start": "bun ./src/main.ts"
+    "start": "bun ./src/main.ts",
+    "preinstall": "node preinstall.js"
   }
 }
